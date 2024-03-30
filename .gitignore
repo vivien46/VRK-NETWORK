@@ -5,5 +5,5 @@
 /.vs
 /.vscode
 /client/obj
-/server/bin
-/server/obj
+/Server/bin
+/Server/obj
