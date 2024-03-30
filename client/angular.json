@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "vrk-network.client": {
+    "client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/vrk-network.client",
+            "outputPath": "dist/client",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "vrk-network.client:build:production"
+              "buildTarget": "client:build:production"
             },
             "development": {
-              "buildTarget": "vrk-network.client:build:development"
+              "buildTarget": "client:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -81,7 +81,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "vrk-network.client:build"
+            "buildTarget": "client:build"
           }
         },
         "test": {
