@@ -9,5 +9,8 @@ namespace Server.Models
         [Column(TypeName = "text")]
         public string? Description { get; set; }
         public int IdUser { get; set; }
+
+        public User User { get; } = null!;
+        public List<UserGroup> UsersGroups { get; } = [];
     }
 }
