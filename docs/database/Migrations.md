@@ -16,7 +16,7 @@ public DbSet<Entity> Entities { get; set; }
 Entrer la commande suivante à la racine du projet Server.
 
 ```
-dotnet migrations add MigrationName
+dotnet ef migrations add MigrationName
 ```
 
 La migration est ajoutée dans le dossier Server/Migrations.

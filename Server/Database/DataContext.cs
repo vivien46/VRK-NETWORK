@@ -9,6 +9,7 @@ namespace Server.Database
         public DbSet<User> Users { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
+        public DbSet<Discution> Discution { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Reaction> Reactions { get; set; }
