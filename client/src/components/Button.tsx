@@ -8,7 +8,8 @@ interface ButtonProps {
 // Définition du composant Button avec des props typées
 const Button: React.FC<ButtonProps> = ({ content  }) => {
   return (
-    <button className="bg-amber-400">{content}</button>  // Utilisation de 'color' comme style CSS du texte du bouton
+    <button className='text-red-500'>{content}</button>
+      // Utilisation de 'color' comme style CSS du texte du bouton
   );
 };
 
