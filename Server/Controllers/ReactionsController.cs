@@ -6,9 +6,9 @@ namespace Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : BaseController<User>
+    public class ReactionsController : BaseController<Reaction>
     {
-        public UsersController(DataContext context) : base(context, c => c.Users)
+        public ReactionsController(DataContext context) : base(context, c => c.Reactions)
         {
         }
     }

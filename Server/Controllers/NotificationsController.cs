@@ -6,10 +6,11 @@ namespace Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : BaseController<User>
+    public class NotificationsController : BaseController<Notification>
     {
-        public UsersController(DataContext context) : base(context, c => c.Users)
+        public NotificationsController(DataContext context) : base(context, c => c.Notifications)
         {
         }
     }
 }
+

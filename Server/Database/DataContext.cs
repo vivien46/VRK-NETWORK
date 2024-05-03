@@ -16,7 +16,8 @@ namespace Server.Database
         #endregion
 
         #region constructor
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        public DataContext(DbContextOptions<DataContext> options)
+            : base(options)
         {
             InitializeDatabase();
         }
@@ -25,20 +26,22 @@ namespace Server.Database
         #region methods
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Group>()
+            modelBuilder
+                .Entity<Group>()
                 .HasOne<User>(g => g.User)
                 .WithMany()
                 .HasForeignKey(g => g.IdUser);
 
-            modelBuilder.Entity<UserGroup>()
-                .HasKey(ug => new { ug.IdUser, ug.IdGroup });
+            modelBuilder.Entity<UserGroup>().HasKey(ug => new { ug.IdUser, ug.IdGroup });
 
-            modelBuilder.Entity<UserGroup>()
+            modelBuilder
+                .Entity<UserGroup>()
                 .HasOne(ug => ug.User)
                 .WithMany(u => u.UsersGroups)
                 .HasForeignKey(ug => ug.IdUser);
 
-            modelBuilder.Entity<UserGroup>()
+            modelBuilder
+                .Entity<UserGroup>()
                 .HasOne(ug => ug.Group)
                 .WithMany(g => g.UsersGroups)
                 .HasForeignKey(ug => ug.IdGroup);
@@ -54,8 +57,12 @@ namespace Server.Database
                 }
                 else
                 {
-                    Console.WriteLine("If the database model is not created yet, generate a migration using 'dotnet ef migrations add Creation'.");
-                    Console.WriteLine("If the database model has changed, generate a migration using 'dotnet ef migrations add Migration_X'.");
+                    Console.WriteLine(
+                        "If the database model is not created yet, generate a migration using 'dotnet ef migrations add Creation'."
+                    );
+                    Console.WriteLine(
+                        "If the database model has changed, generate a migration using 'dotnet ef migrations add Migration_X'."
+                    );
                 }
             }
             catch (Exception ex)
