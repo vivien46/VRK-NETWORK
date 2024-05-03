@@ -1,104 +1,98 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 using Server.Database;
-using Server.Models;
 
-namespace Server.Controllers
+public abstract class BaseController<T> : ControllerBase where T : class
 {
+    private readonly DataContext _context;
+    private readonly DbSet<T> _entities;
 
-    public abstract class BaseController<T> : ControllerBase where T : class
+    public BaseController(DataContext context, Func<DataContext, DbSet<T>> dbSetAccessor)
     {
-        #region attributes
-        private readonly DataContext _context;
-        #endregion
+        _context = context;
+        _entities = dbSetAccessor(context);
+    }
 
-        #region constructor
-        public BaseController(DataContext context)
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<T>>> GetAll()
+    {
+        return await _entities.ToListAsync();
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<T>> GetById(int id)
+    {
+        T item = await _entities.FindAsync(id);
+
+        if (item == null)
         {
-            _context = context;
+            return NotFound();
         }
-        #endregion
 
-        #region CRUD
+        return item;
+    }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<T>>> GetAll()
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, T item)
+    {
+       int itemId = GetItemId(item);
+        if (id != itemId)
         {
-            return await _context.T.ToListAsync();
+            return BadRequest();
         }
 
+        _context.Entry(item).State = EntityState.Modified;
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<T>> GetById(int id)
+        try
         {
-            T item = await _context.T.FindAsync(id);
-
-            if (item == null)
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!await _entities.AnyAsync(i => GetItemId(i) == itemId))
             {
                 return NotFound();
             }
-
-            return item;
+            else
+            {
+                throw;
+            }
         }
 
+        return NoContent();
+    }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, T item)
+    [HttpPost]
+    public async Task<ActionResult<T>> Create(T item)
+    {
+        _entities.Add(item);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction(
+            nameof(Create),
+            new { id = GetItemId(item) },
+            item
+        );
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        T item = await _entities.FindAsync(id);
+        if (item == null)
         {
-            if (id != item.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(item).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.T.Any(i => i.Id == id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return NotFound();
         }
 
+        _entities.Remove(item);
+        await _context.SaveChangesAsync();
 
-        [HttpPost]
-        public async Task<ActionResult<T>> Create(T item)
-        {
-            _context.T.Add(item);
-            await _context.SaveChangesAsync();
+        return NoContent();
+    }
 
-            return CreatedAtAction(
-                nameof(Create),
-                new { id = item.Id },
-                item
-            );
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            T item = await _context.T.FindAsync(id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-
-            _context.T.Remove(item);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-        #endregion
+    private int GetItemId(T item)
+    {
+        return 8; // A corriger
     }
 }
