@@ -1,18 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Server.Database;
+using Server.Models;
 
 namespace Server.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : ControllerBase
-    {
-        #region attributes
-        #endregion
-
-        #region constructor
-        #endregion
-
-        #region CRUD
-        #endregion
-    }
+    [ApiController]
+    public class UsersController : BaseController<User> { }
 }
