@@ -10,7 +10,7 @@ namespace Server.Models
         public string? Description { get; set; }
         public int IdUser { get; set; }
 
-        public User User { get; set; } = null!;
+        public User User { get;  } = null!;
         public List<UserGroup> UsersGroups { get; } = [];
     }
 }
