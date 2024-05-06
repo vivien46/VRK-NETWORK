@@ -1,21 +1,37 @@
+import React from 'react';
 import Button from './components/Button';
-import Input from './components/Input';
+import Form, { FormProps } from './components/Form'; // Assure-toi que FormProps est exporté depuis le composant Form
 
-const App = () => {
- 
+const App: React.FC = () => {
+  // Définition des inputs pour le formulaire
+  const formInputs = [
+    { label: 'Nom', type: 'text', field: 'name', isRequired: true },
+    { label: 'Email', type: 'email', field: 'email', isRequired: true },
+    { label: 'Message', type: 'text', field: 'message', isRequired: false },
+  ];
+
+  // Props pour le composant Form
+  const formProps: FormProps = {
+    action: 'https://exemple.com/api/form-submit', // URL où le formulaire sera envoyé
+    inputs: formInputs, // Inputs à afficher dans le formulaire
+  };
+
   return (
     <>
-      <Button content='Ma phrase' />
-      
-      <form action=""> 
-        <Input label= "username"
-                type="text"
-                field='username'
-                isRequired= {true}
-                />
-        <input type="submit" />
-      </form>
+      <h1>Mon Application</h1>
+      {/* Utilisation du composant Button */}
+      <Button content="Clique ici" />
 
+      {/* Utilisation du composant Form avec les props spécifiées */}
+      <Form {...formProps} />
+      <Form action={formProps.action} inputs={formProps.inputs} />
+      <Form
+        action="POST"
+        inputs={[
+          { label: 'InputTest', type: 'password', field: 'name', isRequired: true },
+        ]}
+      />
+      <Form action="POST" inputs={[formProps.inputs[2]]} />
     </>
   );
 };
