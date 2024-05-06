@@ -8,8 +8,7 @@ namespace Server.Controllers
     [ApiController]
     public class ReactionsController : BaseController<Reaction>
     {
-        public ReactionsController(DataContext context) : base(context, c => c.Reactions)
-        {
-        }
+        public ReactionsController(DataContext context)
+            : base(context, c => c.Reactions) { }
     }
 }

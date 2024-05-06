@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-
 using Server.Database;
 using Server.Models;
 
@@ -9,8 +8,7 @@ namespace Server.Controllers
     [ApiController]
     public class GroupsController : BaseController<Group>
     {
-        public GroupsController(DataContext context) : base(context, c => c.Groups)
-        {
-        }
+        public GroupsController(DataContext context)
+            : base(context, c => c.Groups) { }
     }
 }

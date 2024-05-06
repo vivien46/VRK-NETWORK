@@ -1,11 +1,10 @@
 using System.Reflection;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
 using Server.Database;
 
-public abstract class BaseController<T> : ControllerBase where T : class
+public abstract class BaseController<T> : ControllerBase
+    where T : class
 {
     private readonly DataContext _context;
     private readonly DbSet<T> _entities;
@@ -38,7 +37,7 @@ public abstract class BaseController<T> : ControllerBase where T : class
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, T item)
     {
-       int itemId = GetItemId(item);
+        int itemId = GetItemId(item);
         if (id != itemId)
         {
             return BadRequest();
@@ -77,11 +76,7 @@ public abstract class BaseController<T> : ControllerBase where T : class
         _entities.Add(item);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(
-            nameof(Create),
-            new { id = GetItemId(item) },
-            item
-        );
+        return CreatedAtAction(nameof(Create), new { id = GetItemId(item) }, item);
     }
 
     [HttpDelete("{id}")]
@@ -104,7 +99,7 @@ public abstract class BaseController<T> : ControllerBase where T : class
         PropertyInfo propertyInfo = item.GetType().GetProperty("Id");
         if (propertyInfo == null)
         {
-            throw new InvalidOperationException("Le type doit avoir une propriété Id");
+            throw new InvalidOperationException("Le type doit avoir une propriï¿½tï¿½ Id");
         }
 
         int id = (int)propertyInfo.GetValue(item);
