@@ -8,9 +8,7 @@ namespace Server.Controllers
     [ApiController]
     public class NotificationsController : BaseController<Notification>
     {
-        public NotificationsController(DataContext context) : base(context, c => c.Notifications)
-        {
-        }
+        public NotificationsController(DataContext context)
+            : base(context, c => c.Notifications) { }
     }
 }
-

@@ -8,8 +8,7 @@ namespace Server.Controllers
     [ApiController]
     public class MessagesController : BaseController<Message>
     {
-        public MessagesController(DataContext context) : base(context, c => c.Messages)
-        {
-        }
+        public MessagesController(DataContext context)
+            : base(context, c => c.Messages) { }
     }
 }

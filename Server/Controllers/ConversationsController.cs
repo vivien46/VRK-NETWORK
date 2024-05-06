@@ -8,8 +8,7 @@ namespace Server.Controllers
     [ApiController]
     public class ConversationsController : BaseController<Conversation>
     {
-        public ConversationsController(DataContext context) : base(context, c => c.Conversations)
-        {
-        }
+        public ConversationsController(DataContext context)
+            : base(context, c => c.Conversations) { }
     }
 }

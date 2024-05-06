@@ -8,8 +8,7 @@ namespace Server.Controllers
     [ApiController]
     public class UsersController : BaseController<User>
     {
-        public UsersController(DataContext context) : base(context, c => c.Users)
-        {
-        }
+        public UsersController(DataContext context)
+            : base(context, c => c.Users) { }
     }
 }
