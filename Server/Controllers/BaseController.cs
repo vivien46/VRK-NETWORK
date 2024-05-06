@@ -1,3 +1,5 @@
+using System.Reflection;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,7 +44,13 @@ public abstract class BaseController<T> : ControllerBase where T : class
             return BadRequest();
         }
 
-        _context.Entry(item).State = EntityState.Modified;
+        T existingItem = await _entities.FindAsync(id);
+        if (existingItem == null)
+        {
+            return NotFound();
+        }
+
+        _context.Entry(existingItem).CurrentValues.SetValues(item);
 
         try
         {
@@ -93,6 +101,13 @@ public abstract class BaseController<T> : ControllerBase where T : class
 
     private int GetItemId(T item)
     {
-        return 8; // A corriger
+        PropertyInfo propertyInfo = item.GetType().GetProperty("Id");
+        if (propertyInfo == null)
+        {
+            throw new InvalidOperationException("Le type doit avoir une propriété Id");
+        }
+
+        int id = (int)propertyInfo.GetValue(item);
+        return id;
     }
 }
