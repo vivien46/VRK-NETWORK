@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Server.Database;
+using Server.Middlewares;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -18,16 +19,11 @@ builder.Services.AddDbContext<DataContext>(options =>
 string origins = "origins";
 
 builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: origins,
-                      policy =>
-                      {
-                          policy.AllowAnyOrigin()
-                                .AllowAnyHeader()
-                                .AllowAnyMethod();
-                      });
-});
-
+    options.AddPolicy(
+        name: origins,
+        policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+    )
+);
 
 WebApplication app = builder.Build();
 
@@ -41,10 +37,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// HTTPS
 app.UseHttpsRedirection();
 
+// CORS
 app.UseCors(origins);
 
+// Middlewares
+app.UseMiddleware<HashPasswordMiddleware>();
+
+// Controllers
 app.MapControllers();
 
 app.Run();
