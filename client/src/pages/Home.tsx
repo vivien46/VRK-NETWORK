@@ -58,7 +58,7 @@ const Home: React.FC = () => {
 
       <p>Exemples d'utilisation de Forms</p>
       <Form {...formProps} />
-      <Form action={formProps.action} inputs={formProps.inputs} />
+      <Form action={formProps.action} inputs={formProps.inputs} className="w-full max-w-lg p-4 bg-blue-500 text-white rounded-lg" />
       <Form
         action="POST"
         inputs={[
@@ -70,7 +70,7 @@ const Home: React.FC = () => {
       <h1>Liste des utilisateurs</h1>
       <ul>
         {users.map((user) => (
-          <li key={user.id}>{user.username}</li>
+          <li key={user.id}>{user.username} {user.email}</li>
         ))}
       </ul>
     </>
