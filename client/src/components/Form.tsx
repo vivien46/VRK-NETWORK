@@ -5,11 +5,13 @@ import Button from './Button';
 export interface FormProps {
   action: string;
   inputs: InputProps[];
+  className?: string;
 }
 
-const Form: React.FC<FormProps> = ({ action, inputs }) => {
+const Form: React.FC<FormProps> = ({ action, inputs, className }) => {
   return (
-    <form action={action}>
+    <div className='form'>
+    <form action={action} className={className}>
       {inputs.map((input) => (
         <Input
           key={input.label}
@@ -19,8 +21,9 @@ const Form: React.FC<FormProps> = ({ action, inputs }) => {
           isRequired={input.isRequired}
         />
       ))}
-      <Button content="Envoyer" />
+      <br /><Button content="Envoyer" />
     </form>
+    </div>
   );
 };
 
