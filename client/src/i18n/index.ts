@@ -13,12 +13,13 @@ const resources: { fr: TranslationResources } = {
   },
 };
 
-// Initialiser i18n
+const language = localStorage.getItem('lang') || 'en';
+
 i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: "en",
+    lng: language,
     debug: true,
     fallbackLng: "en",
     interpolation: {

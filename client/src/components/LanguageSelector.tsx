@@ -9,6 +9,7 @@ const LanguageSelector: React.FC = () => {
     const newLanguage = e.target.value;
     i18n.changeLanguage(newLanguage);
     setSelectedLanguage(newLanguage);
+    localStorage.setItem("lang", e.target.value);
   };
 
   return (
