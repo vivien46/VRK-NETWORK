@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import Form, { FormProps } from '../components/Form';
@@ -22,6 +23,8 @@ interface User {
 }
 
 const Home: React.FC = () => {
+  const { t } = useTranslation();
+
   const formInputs = [
     { label: 'Nom', type: 'text', field: 'name', isRequired: true },
     { label: 'Email', type: 'email', field: 'email', isRequired: true },
@@ -56,6 +59,11 @@ const Home: React.FC = () => {
   return (
     <>
       <h1>Mon Application</h1>
+
+      <div className="mt-[10px]">
+        <button>Test de traduction : {t("Home")}</button>
+    </div>
+
       <Button content="Clique ici" />
 
       <p>Exemples d'utilisation de Forms</p>
