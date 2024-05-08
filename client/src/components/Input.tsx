@@ -11,7 +11,7 @@ export interface InputProps {
 const Input: React.FC<InputProps> = ({ label, type, field, isRequired = false, className }) => {
   return (
     <>
-      <label htmlFor={field} className="text-white-500">
+      <label htmlFor={field} className="">
         {label} :
       </label><br />
       <input type={type} id={field} name={field} required={isRequired} className={className}/><br />

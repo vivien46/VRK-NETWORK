@@ -58,7 +58,7 @@ const Home: React.FC = () => {
 
       <p>Exemples d'utilisation de Forms</p>
       <Form {...formProps} />
-      <Form action={formProps.action} inputs={formProps.inputs} className="w-full max-w-lg p-4 bg-blue-500 text-white rounded-lg" />
+      <Form action={formProps.action} inputs={formProps.inputs} className="w-full max-w-lg p-4 bg-gray-300 text-black rounded-lg text-center" />
       <Form
         action="POST"
         inputs={[
@@ -67,12 +67,43 @@ const Home: React.FC = () => {
       />
       <Form action="POST" inputs={[formProps.inputs[2]]} />
 
-      <h1>Liste des utilisateurs</h1>
-      <ul>
+      <h1 className='text-xl font-medium m-5 text-center'>Liste des utilisateurs</h1>
+      <div className='flex'>
+      <table className='table-auto border-collapse border border-slate-400 text-center flex-1'>
+          <thead>
+        <tr>
+          <th className='border border-slate-700 bg-green-300'>Name</th>
+          <th className='border border-slate-700 bg-green-300'>Email</th>
+          <th className='border border-slate-700 bg-green-300'>Creation Date</th>
+          <th className='border border-slate-700 bg-green-300'>Deleted</th>
+        </tr>
+      </thead>
+    <tbody>
         {users.map((user) => (
-          <li key={user.id}>{user.username} {user.email}</li>
+          <tr key={user.id}>
+            <td className='border border-slate-500'>{user.username}</td>
+            <td className='border border-slate-500'>{user.email}</td>
+            <td className='border border-slate-500'>{new Date(user.createdOn).toLocaleDateString('fr-FR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        })} <strong>à</strong> {new Date(user.createdOn).toLocaleTimeString('fr-FR', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        })}
+        
+            </td>
+            <td className='border border-slate-500'>{ user.isDeleted ? (
+            <>
+              <i className='fa-regular fa-square-check text-green-500'></i> Yes 
+            </>  
+            )  : <><i className='fa-regular fa-square text-pink-500'></i> No </>}</td>
+          </tr>
         ))}
-      </ul>
+        </tbody>
+      </table>
+      </div>
     </>
   );
 };
