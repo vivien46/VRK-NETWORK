@@ -10,19 +10,20 @@ export interface FormProps {
 
 const Form: React.FC<FormProps> = ({ action, inputs, className }) => {
   return (
-    <div className='form'>
-    <form action={action} className={className}>
-      {inputs.map((input) => (
-        <Input
-          key={input.label}
-          label={input.label}
-          type={input.type}
-          field={input.field}
-          isRequired={input.isRequired}
-        />
-      ))}
-      <br /><Button content="Envoyer" />
-    </form>
+    <div className="m-[15px] p-[15px] w-[100%] flex flex-row justify-center items-center">
+      <form action={action} className={className}>
+        {inputs.map((input) => (
+          <Input
+            key={input.label}
+            label={input.label}
+            type={input.type}
+            field={input.field}
+            isRequired={input.isRequired}
+          />
+        ))}
+        <br />
+        <Button content="Envoyer" />
+      </form>
     </div>
   );
 };

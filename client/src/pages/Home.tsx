@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import Form, { FormProps } from '../components/Form';
 import { apiUsers } from '../api/users';
+import { FaSquareCheck } from 'react-icons/fa6';
+import { FaSquare } from 'react-icons/fa';
 
 // Voir comment éviter de dupliquer les données provenant du backend C#
 interface User {
@@ -95,10 +97,8 @@ const Home: React.FC = () => {
         
             </td>
             <td className='border border-slate-500'>{ user.isDeleted ? (
-            <>
-              <i className='fa-regular fa-square-check text-green-500'></i> Yes 
-            </>  
-            )  : <><i className='fa-regular fa-square text-pink-500'></i> No </>}</td>
+            <div className="flex flex-row gap-1"><FaSquareCheck className="text-green-500" /> Yes</div>  
+            )  : <div className="flex flex-row gap-1"><FaSquare className=' text-pink-500'></FaSquare> No</div>}</td>
           </tr>
         ))}
         </tbody>
