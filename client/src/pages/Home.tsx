@@ -58,7 +58,7 @@ const Home: React.FC = () => {
 
       <p>Exemples d'utilisation de Forms</p>
       <Form {...formProps} />
-      <Form action={formProps.action} inputs={formProps.inputs} className="w-full max-w-lg p-4 bg-black text-red-600 rounded-lg text-center" />
+      <Form action={formProps.action} inputs={formProps.inputs} className="w-full max-w-lg p-4 bg-gray-300 text-black rounded-lg text-center" />
       <Form
         action="POST"
         inputs={[
