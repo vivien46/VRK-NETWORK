@@ -15,7 +15,7 @@ const LanguageSelector: React.FC = () => {
   return (
     <select defaultValue={selectedLanguage} onChange={chooseLanguage}>
       <option value="en">English</option>
-      <option value="fr">Français</option>
+      <option value="fr" selected>Français</option>
     </select>
   );
 };

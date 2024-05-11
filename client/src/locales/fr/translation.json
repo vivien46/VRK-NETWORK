@@ -2,6 +2,11 @@
     "Home": "Accueil",
     "About": "À propos",
     "username.label": "Nom d'utilisateur",
-    "password.label": "Mot de passe"
+    "password.label": "Mot de passe",
+    "email.label": "Adresse E-mail",
+    "createdOn": "Créé le",
+    "isDeleted.label": "Compte Supprimé",
+    "yes": "Oui",
+    "no": "Non"
   }
   

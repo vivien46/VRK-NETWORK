@@ -82,10 +82,10 @@ const Home: React.FC = () => {
       <table className='table-auto border-collapse border border-slate-400 text-center flex-1'>
           <thead>
         <tr>
-          <th className='border border-slate-700 bg-green-300'>Name</th>
-          <th className='border border-slate-700 bg-green-300'>Email</th>
-          <th className='border border-slate-700 bg-green-300'>Creation Date</th>
-          <th className='border border-slate-700 bg-green-300'>Deleted</th>
+          <th className='border border-slate-700 bg-green-300'>{t("username.label")}</th>
+          <th className='border border-slate-700 bg-green-300'>{t("email.label")}</th>
+          <th className='border border-slate-700 bg-green-300'>{t("createdOn")}</th>
+          <th className='border border-slate-700 bg-green-300'>{t("isDeleted.label")}</th>
         </tr>
       </thead>
     <tbody>
@@ -105,8 +105,8 @@ const Home: React.FC = () => {
         
             </td>
             <td className='border border-slate-500'>{ user.isDeleted ? (
-            <div className="flex flex-row gap-1"><FaSquareCheck className="text-green-500" /> Yes</div>  
-            )  : <div className="flex flex-row gap-1"><FaSquare className=' text-pink-500'></FaSquare> No</div>}</td>
+            <div className="flex flex-row gap-1 justify-center items-center h-full"><FaSquareCheck className="text-green-500" /> {t('yes')}</div>  
+            )  : <div className="flex flex-row gap-1 justify-center items-center h-full"><FaSquare className=' text-pink-500'></FaSquare>{t('no')}</div>}</td>
           </tr>
         ))}
         </tbody>
