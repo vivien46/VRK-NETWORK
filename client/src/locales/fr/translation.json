@@ -1,7 +1,11 @@
 {
-    "Home": "Accueil",
-    "About": "À propos",
-    "username.label": "Nom d'utilisateur",
-    "password.label": "Mot de passe"
-  }
-  
+  "Home": "Accueil",
+  "About": "À propos",
+  "Username": "Nom d'utilisateur",
+  "Password": "Mot de passe",
+  "Your username": "Votre nom d'utilisateur",
+  "Your password": "Votre mot de passe",
+  "Login": "Connexion",
+  "Logout": "Déconnexion",
+  "All rights reserved": "Tous droits réservés"
+}
