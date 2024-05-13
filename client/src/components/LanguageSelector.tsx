@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import i18n from "../i18n";
+import React, { useState } from 'react';
+import i18n from '../i18n';
 
 const LanguageSelector: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<string>(i18n.language);
@@ -9,7 +9,7 @@ const LanguageSelector: React.FC = () => {
     const newLanguage = e.target.value;
     i18n.changeLanguage(newLanguage);
     setSelectedLanguage(newLanguage);
-    localStorage.setItem("lang", e.target.value);
+    localStorage.setItem('lang', e.target.value);
   };
 
   return (
