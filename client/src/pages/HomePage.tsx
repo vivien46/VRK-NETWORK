@@ -46,6 +46,7 @@ const HomePage: React.FC = () => {
   return (
     <>
       <p>Test de traduction : {t('Home')}</p>
+     //test commentaire
 
       <p className="text-xl font-medium m-5 text-center">Liste des utilisateurs</p>
       <div className="flex">
