@@ -44,7 +44,7 @@ app.UseHttpsRedirection();
 app.UseCors(origins);
 
 // Middlewares
-app.UseMiddleware<HashPasswordMiddleware>();
+app.UseMiddleware<HashPassword>();
 
 // Controllers
 app.MapControllers();

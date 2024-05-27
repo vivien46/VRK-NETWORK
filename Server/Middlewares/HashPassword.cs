@@ -5,11 +5,11 @@ using Newtonsoft.Json.Linq;
 
 namespace Server.Middlewares
 {
-    public class HashPasswordMiddleware
+    public class HashPassword
     {
         private readonly RequestDelegate _next;
 
-        public HashPasswordMiddleware(RequestDelegate next)
+        public HashPassword(RequestDelegate next)
         {
             _next = next;
         }
@@ -26,7 +26,7 @@ namespace Server.Middlewares
                 if (!string.IsNullOrEmpty(password))
                 {
                     var salt = GenerateSalt();
-                    var hashedPassword = HashPassword(password, salt);
+                    var hashedPassword = Hash(password, salt);
 
                     json["password"] = hashedPassword;
 
@@ -43,7 +43,7 @@ namespace Server.Middlewares
             await _next(context);
         }
 
-        public static string HashPassword(string password, byte[] salt)
+        public static string Hash(string password, byte[] salt)
         {
             using SHA256 sha256 = SHA256.Create();
             byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
