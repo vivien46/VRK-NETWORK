@@ -1,10 +1,14 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 const Login2Test: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="px-10 py-8">
           <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-4">
-            Se connecter
+            {t('Login')}
           </h2>
           <form className="space-y-6" action="#" method="POST">
             <div>

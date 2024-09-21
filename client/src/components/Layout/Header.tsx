@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import LanguageSelector from "../LanguageSelector";
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
@@ -12,15 +13,16 @@ const Header: React.FC = () => {
         </div>
         {/* Essayer de mettre plus sur la gauche */}
         <nav className="mr-4 space-x-5">
-          <a href="#" className="hover:text-gray-300">
+          <a href="/" className="hover:text-gray-300">
             {t('Home')}
           </a>
           <a href="/login" className="hover:text-gray-300">
             {t('Login')}
           </a>
-          <a href="#" className="hover:text-gray-300">
+          <a href="/logout" className="hover:text-gray-300">
             {t('Logout')}
           </a>
+          <LanguageSelector />
         </nav>
       </div>
     </header>

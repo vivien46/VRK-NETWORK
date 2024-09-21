@@ -1,6 +1,8 @@
 using System.Reflection;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 using Server.Database;
 
 public abstract class BaseController<T> : ControllerBase
@@ -24,7 +26,7 @@ public abstract class BaseController<T> : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<T>> GetById(int id)
     {
-        T item = await _entities.FindAsync(id);
+        T? item = await _entities.FindAsync(id);
 
         if (item == null)
         {
@@ -43,7 +45,7 @@ public abstract class BaseController<T> : ControllerBase
             return BadRequest();
         }
 
-        T existingItem = await _entities.FindAsync(id);
+        T? existingItem = await _entities.FindAsync(id);
         if (existingItem == null)
         {
             return NotFound();
@@ -82,7 +84,7 @@ public abstract class BaseController<T> : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        T item = await _entities.FindAsync(id);
+        T? item = await _entities.FindAsync(id);
         if (item == null)
         {
             return NotFound();
@@ -96,13 +98,23 @@ public abstract class BaseController<T> : ControllerBase
 
     private int GetItemId(T item)
     {
-        PropertyInfo propertyInfo = item.GetType().GetProperty("Id");
-        if (propertyInfo == null)
+        if (item == null)
         {
-            throw new InvalidOperationException("Le type doit avoir une propri�t� Id");
+            throw new ArgumentNullException(nameof(item), "L'élément ne peut pas être null");
         }
 
-        int id = (int)propertyInfo.GetValue(item);
-        return id;
+        PropertyInfo? propertyInfo = item.GetType().GetProperty("Id");
+        if (propertyInfo == null)
+        {
+            throw new InvalidOperationException("Le type doit avoir une propriété 'Id'");
+        }
+
+        object? value = propertyInfo.GetValue(item);
+        if (value == null)
+        {
+            throw new InvalidOperationException("La propriété 'Id' ne peut pas être null");
+        }
+
+        return (int)value;
     }
 }

@@ -13,7 +13,7 @@ const LanguageSelector: React.FC = () => {
   };
 
   return (
-    <select defaultValue={selectedLanguage} onChange={chooseLanguage}>
+    <select defaultValue={selectedLanguage} onChange={chooseLanguage} className="hover:text-gray-300 bg-black">
       <option value="en">English</option>
       <option value="fr">Français</option>
     </select>
